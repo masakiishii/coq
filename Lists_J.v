@@ -86,13 +86,22 @@ Fixpoint app (l1 l2 : natlist) : natlist :=
 Notation "x ++ y" := (app x y) (right associativity, at level 60).
 
 Example test_app1: [1,2,3] ++ [4,5] = [1,2,3,4,5].
-Proof.simpl.reflexivity.Qed.
+Proof.
+simpl.
+reflexivity.
+Qed.
 
 Example test_app2: nil ++ [4,5] = [4,5].
-Proof.simpl.reflexivity.Qed.
+Proof.
+simpl.
+reflexivity.
+Qed.
 
 Example test_app3: [1,2,3] ++ nil = [1,2,3].
-Proof.simpl.reflexivity.Qed.
+Proof.
+simpl.
+reflexivity.
+Qed.
 
 Definition hd (default : nat)(l : natlist) : nat :=
  match l with
@@ -111,13 +120,22 @@ Definition tail (l : natlist) : natlist :=
 Eval simpl in (tail [1,2,3,4,5]).
 
 Example test_hd1 : hd O [1,2,3] = 1.
-Proof.simpl.reflexivity.Qed.
+Proof.
+simpl.
+reflexivity.
+Qed.
 
 Example test_hd2 : hd O [] = 0.
-Proof.simpl.reflexivity.Qed.
+Proof.
+simpl.
+reflexivity.
+Qed.
 
 Example test_tail : tail [1,2,3] = [2,3].
-Proof.simpl.reflexivity.Qed.
+Proof.
+simpl.
+reflexivity.
+Qed.
 
 Definition bag := natlist.
 
@@ -126,7 +144,10 @@ Definition bag := natlist.
 (*-----<<< Inference about the lists >>>------*)
 Theorem nil_app : forall (l : natlist), [] ++ l = l.
 Proof.
-intros.simpl.reflexivity.Qed.
+intros.
+simpl.
+reflexivity.
+Qed.
 
 Theorem tl_lentgh_pred : forall (l : natlist), pred (length l) = length (tail l).
 Proof.
