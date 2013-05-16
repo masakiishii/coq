@@ -94,3 +94,28 @@ Proof.simpl.reflexivity.Qed.
 Example test_app3: [1,2,3] ++ nil = [1,2,3].
 Proof.simpl.reflexivity.Qed.
 
+Definition hd (default : nat)(l : natlist) : nat :=
+ match l with
+  | nil => default
+  | h :: t => h
+ end.
+
+Eval simpl in (hd O [1,2,3,4,5]).
+
+Definition tail (l : natlist) : natlist :=
+ match l with
+  | nil => nil
+  | h :: t => t
+ end.
+
+Eval simpl in (tail [1,2,3,4,5]).
+
+Example test_hd1 : hd O [1,2,3] = 1.
+Proof.simpl.reflexivity.Qed.
+
+Example test_hd2 : hd O [] = 0.
+Proof.simpl.reflexivity.Qed.
+
+Example test_tail : tail [1,2,3] = [2,3].
+Proof.simpl.reflexivity.Qed.
+
