@@ -54,3 +54,43 @@ destruct p as (n,m).
 simpl.
 reflexivity.
 Qed.
+
+Inductive natlist : Type :=
+ | nil : natlist
+ | cons : nat -> natlist -> natlist.
+
+Definition l_123 := cons 1 (cons 2 (cons 3 nil)).
+
+Notation "x :: l" := (cons x l)(at level 60, right associativity).
+Notation "[ ]" := nil.
+Notation "[ x , .. , y ]" := (cons x .. (cons y nil) ..).
+
+Fixpoint repeat (n count : nat) : natlist :=
+ match count with
+  | O => nil
+  | S count' => n :: (repeat n count')
+ end.
+
+Fixpoint length (l : natlist) : nat :=
+ match l with
+  | nil => O
+  | h :: t => S (length t)
+ end.
+
+Fixpoint app (l1 l2 : natlist) : natlist :=
+ match l1 with
+  | nil => l2
+  | h :: t => h :: (app t l2)
+ end.
+
+Notation "x ++ y" := (app x y) (right associativity, at level 60).
+
+Example test_app1: [1,2,3] ++ [4,5] = [1,2,3,4,5].
+Proof.simpl.reflexivity.Qed.
+
+Example test_app2: nil ++ [4,5] = [4,5].
+Proof.simpl.reflexivity.Qed.
+
+Example test_app3: [1,2,3] ++ nil = [1,2,3].
+Proof.simpl.reflexivity.Qed.
+
