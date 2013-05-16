@@ -119,3 +119,22 @@ Proof.simpl.reflexivity.Qed.
 Example test_tail : tail [1,2,3] = [2,3].
 Proof.simpl.reflexivity.Qed.
 
+Definition bag := natlist.
+
+
+
+(*-----<<< Inference about the lists >>>------*)
+Theorem nil_app : forall (l : natlist), [] ++ l = l.
+Proof.
+intros.simpl.reflexivity.Qed.
+
+Theorem tl_lentgh_pred : forall (l : natlist), pred (length l) = length (tail l).
+Proof.
+intros.
+destruct l.
+simpl.
+reflexivity.
+simpl.
+reflexivity.
+Qed.
+
