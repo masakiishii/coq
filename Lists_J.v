@@ -109,7 +109,6 @@ Definition hd (default : nat)(l : natlist) : nat :=
   | h :: t => h
  end.
 
-Eval simpl in (hd O [1,2,3,4,5]).
 
 Definition tail (l : natlist) : natlist :=
  match l with
@@ -117,7 +116,6 @@ Definition tail (l : natlist) : natlist :=
   | h :: t => t
  end.
 
-Eval simpl in (tail [1,2,3,4,5]).
 
 Example test_hd1 : hd O [1,2,3] = 1.
 Proof.
@@ -159,3 +157,6 @@ simpl.
 reflexivity.
 Qed.
 
+End NatList.
+
+(*---------<<< start Dictionary >>>-----------*)
