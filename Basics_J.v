@@ -153,3 +153,165 @@ Tactic Notation "SSSSSSCase" constr(name) := Case_aux SSSSSSCase name.
 Tactic Notation "SSSSSSSCase" constr(name) := Case_aux SSSSSSSCase name.
 
 
+Theorem andb_true_elim1 : forall (b c : bool),
+  andb b c = true -> b = true.
+Proof.
+  intros b c H.
+  destruct b.
+  Case "b = true".
+    reflexivity.
+  Case "b = false".
+    rewrite <- H. reflexivity. Qed.
+
+Theorem plus_0_r : forall (n:nat), n + 0 = n.
+Proof.
+  intros n. induction n as [| n'].
+  Case "n = 0". reflexivity.
+  Case "n = S n'". simpl. rewrite -> IHn'. reflexivity. Qed.
+
+Theorem minus_diag : forall n,
+  minus n n = 0.
+Proof.
+  intros n. induction n as [| n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = S n'".
+    simpl. rewrite -> IHn'. reflexivity. Qed.
+
+Theorem mult_0_r : forall (n:nat),
+  n * 0 = 0.
+Proof.
+Admitted.
+
+Theorem plus_n_Sm : forall (n m : nat),
+  S (n + m) = n + (S m).
+Proof.
+Admitted.
+
+Theorem plus_comm : forall (n m : nat),
+  n + m = m + n.
+Proof.
+Admitted.
+
+Fixpoint double (n:nat) :=
+  match n with
+  | O => O
+  | S n' => S (S (double n'))
+  end.
+
+Lemma double_plus : forall n, double n = n + n .
+Proof.
+Admitted.
+
+Theorem plus_assoc' : forall (n m p : nat),
+  n + (m + p) = (n + m) + p.
+Proof. intros n m p. induction n as [| n']. reflexivity.
+  simpl. rewrite -> IHn'. reflexivity. Qed.
+
+Theorem plus_assoc : forall (n m p : nat),
+  n + (m + p) = (n + m) + p.
+Proof.
+  intros n m p. induction n as [| n'].
+  Case "n = 0".
+    reflexivity.
+  Case "n = S n'".
+    simpl. rewrite -> IHn'. reflexivity. Qed.
+
+Theorem beq_nat_refl : forall (n : nat),
+  true = beq_nat n n.
+Proof.
+Admitted.
+
+Theorem mult_0_plus' : forall (n m : nat),
+  (0 + n) * m = n * m.
+Proof.
+  intros n m.
+  assert (H: 0 + n = n).
+    Case "Proof of assertion". reflexivity.
+  rewrite -> H.
+  reflexivity. Qed.
+
+Theorem plus_rearrange_firsttry : forall (n m p q : nat),
+  (n + m) + (p + q) = (m + n) + (p + q).
+Proof.
+  intros n m p q.
+  rewrite -> plus_comm.
+Admitted.
+
+Theorem plus_rearrange : forall (n m p q : nat),
+  (n + m) + (p + q) = (m + n) + (p + q).
+Proof.
+  intros n m p q.
+  assert (H: n + m = m + n).
+    Case "Proof of assertion".
+    rewrite -> plus_comm. reflexivity.
+  rewrite -> H. reflexivity. Qed.
+
+Theorem plus_swap : forall (n m p : nat),
+  n + (m + p) = m + (n + p).
+Proof.
+Admitted.
+
+Theorem mult_comm : forall (m n : nat),
+ m * n = n * m.
+Proof.
+Admitted.
+
+Theorem evenb_n__oddb_Sn : forall (n : nat),
+  evenb n = negb (evenb (S n)).
+Proof.
+Admitted.
+
+Theorem ble_nat_refl : forall (n:nat),
+  true = ble_nat n n.
+Proof.
+Admitted.
+
+Theorem zero_nbeq_S : forall (n:nat),
+  beq_nat 0 (S n) = false.
+Proof.
+Admitted.
+
+Theorem andb_false_r : forall (b : bool),
+  andb b false = false.
+Proof.
+Admitted.
+
+Theorem plus_ble_compat_l : forall (n m p : nat),
+  ble_nat n m = true -> ble_nat (p + n) (p + m) = true.
+Proof.
+Admitted.
+
+Theorem S_nbeq_0 : forall (n:nat),
+  beq_nat (S n) 0 = false.
+Proof.
+Admitted.
+
+Theorem mult_1_l : forall (n:nat), 1 * n = n.
+Proof.
+Admitted.
+
+Theorem all3_spec : forall (b c : bool),
+    orb
+      (andb b c)
+      (orb (negb b)
+               (negb c))
+  = true.
+Proof.
+Admitted.
+
+Theorem mult_plus_distr_r : forall (n m p : nat),
+  (n + m) * p = (n * p) + (m * p).
+Proof.
+Admitted.
+
+Theorem mult_assoc : forall (n m p : nat),
+  n * (m * p) = (n * m) * p.
+Proof.
+Admitted.
+
+Theorem plus_swap' : forall (n m p : nat),
+  n + (m + p) = m + (n + p).
+Proof.
+Admitted.
+
