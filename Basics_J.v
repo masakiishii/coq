@@ -125,6 +125,33 @@ Fixpoint ble_nat (n m : nat) : bool :=
       end
   end.
 
+(* ----------<<< Case Analysis >>>----------- *)
+Theorem plus_1_neq_O : forall (n : nat), beq_nat (n + 1) O = false.
+Proof.
+intros n.
+destruct n as [| n'].
+reflexivity.
+reflexivity.
+Qed.
+
+Theorem negb_involutive : forall (b : bool), negb (negb b) = b.
+Proof.
+intros b.
+destruct b.
+reflexivity.
+reflexivity.
+Qed.
+
+Theorem zero_nbeq_plus_1 : forall (n : nat), beq_nat O (n + 1) = false.
+Proof.
+intros.
+destruct n as [| n'].
+reflexivity.
+reflexivity.
+Qed.
+
+
+
 Require String. Open Scope string_scope.
 
 Ltac move_to_top x :=
@@ -162,6 +189,19 @@ Proof.
     reflexivity.
   Case "b = false".
     rewrite <- H. reflexivity. Qed.
+
+Theorem andb_ture_elim2 : forall (b c : bool), andb b c = true -> c = true.
+Proof.
+intros.
+destruct c.
+Case "c = true".
+reflexivity.
+Case "c = false".
+rewrite <- H.
+destruct b.
+reflexivity.
+reflexivity.
+Qed.
 
 Theorem plus_0_r : forall (n:nat), n + 0 = n.
 Proof.
